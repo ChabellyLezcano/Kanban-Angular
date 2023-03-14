@@ -1,0 +1,144 @@
+<button
+  pButton
+  pRipple
+  type="button"
+  (click)="showModalDialog()"
+  icon="pi pi-plus"
+  label="Añadir paciente"
+  class="p-button-primary"
+></button>
+
+<p-dialog
+  [(visible)]="displayDialog"
+  [responsive]="true"
+  [modal]="true"
+  [closable]="true"
+  [closeOnEscape]="true"
+  [dismissableMask]="true"
+  [draggable]="true"
+  (onHide)="onHideDialog()"
+>
+  <div>
+    <form autocomplete="off" [formGroup]="miFormulario" (ngSubmit)="paciente()">
+      <h2 class="title-paciente">Introduzca los datos necesarios</h2>
+      <div class="input-container-paciente">
+        <span class="p-float-label">
+          <input
+            id="float-input"
+            type="text"
+            formControlName="name"
+            pInputText
+          />
+          <label for="float-input">Nombre</label>
+        </span>
+        <span class="p-float-label">
+          <input
+            id="float-input"
+            type="text"
+            formControlName="apellidos"
+            class="custom-input-paciente-1"
+            pInputText
+          />
+          <label for="float-input">Apellidos</label>
+        </span>
+      </div>
+      <div class="input-container-paciente">
+        <span class="p-float-label">
+          <input
+            type="text"
+            class="custom-paciente-input-2"
+            formControlName="email"
+            pInputText
+          />
+          <label for="float-input">Email</label>
+        </span>
+      </div>
+      <div class="input-container-paciente">
+        <span class="p-float-label">
+          <input
+            type="text"
+            class="custom-paciente-input-2"
+            formControlName="direccion"
+            pInputText
+          />
+          <label for="float-input">Dirección</label>
+        </span>
+      </div>
+
+      <div class="input-container-paciente">
+        <span class="p-float-label">
+          <input
+            id="float-input"
+            type="text"
+            formControlName="telefono_movil"
+            pInputText
+          />
+          <label for="float-input">Teléfono Móvil</label>
+        </span>
+        <span class="p-float-label">
+          <input
+            id="float-input"
+            type="text"
+            formControlName="dni"
+            pInputText
+          />
+          <label for="float-input">DNI</label>
+        </span>
+        <span class="p-float-label">
+          <input id="float-input" type="text" formControlName="cp" pInputText />
+          <label for="float-input">CP</label>
+        </span>
+      </div>
+
+      <div class="input-container-paciente">
+        <span class="p-float-label">
+          <input
+            id="float-input"
+            type="text"
+            formControlName="municipio"
+            pInputText
+            class="custom-paciente-input-3"
+          />
+          <label for="float-input">Municipio</label>
+        </span>
+        <span class="p-float-label">
+          <input
+            id="float-input"
+            type="text"
+            formControlName="provincia"
+            pInputText
+            class="custom-paciente-input-3"
+          />
+          <label for="float-input">Provincia</label>
+        </span>
+      </div>
+      <div class="button-container p-d-flex p-ai-center">
+        <button
+          pButton
+          pRipple
+          icon="pi pi-times"
+          type="button"
+          label="Cancelar"
+          class="p-button-raised p-button-danger"
+          (click)="onHideDialog()"
+        ></button>
+        <button
+          pButton
+          pRipple
+          type="submit"
+          (click)="paciente()"
+          icon="pi pi-check"
+          type="button"
+          label="Guardar"
+          class="p-button-raised p-button-success"
+          [disabled]="miFormulario.invalid"
+        ></button>
+      </div>
+    </form>
+  </div>
+</p-dialog>
+
+
+<ul>
+  <li *ngFor="let paciente of pacientes">{{ paciente.name }}</li>
+</ul>

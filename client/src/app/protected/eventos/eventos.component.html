@@ -1,0 +1,105 @@
+<h4>User info</h4>
+<pre>{{ usuario | json }}</pre>
+
+<button
+  pButton
+  pRipple
+  type="button"
+  (click)="showModalDialog()"
+  icon="pi pi-plus"
+  label="Añadir evento"
+  class="p-button-primary"
+></button>
+
+<p-dialog
+  [(visible)]="displayDialog"
+  [responsive]="true"
+  [modal]="true"
+  [closable]="true"
+  [closeOnEscape]="true"
+  [dismissableMask]="true"
+  [draggable]="true"
+  (onHide)="onHideDialog()"
+>
+  <div>
+    <form autocomplete="off" [formGroup]="miFormulario" (ngSubmit)="evento()">
+      <h2 class="title-evento">Introduzca los datos necesarios</h2>
+      <div class="input-container-evento">
+        <span class="p-float-label">
+          <input
+            id="float-input"
+            type="text"
+            formControlName="titulo"
+            class="custom-input-evento"
+            pInputText
+          />
+          <label for="float-input">Titulo</label>
+        </span>
+      </div>
+
+      <div class="input-container-evento">
+        <span class="p-float-label">
+          <textarea
+            id="float-input"
+            formControlName="descripcion"
+            class="custom-input-text-area"
+            pInputTextarea
+          ></textarea>
+          <label for="float-input">Descripción</label>
+        </span>
+      </div>
+     
+      <div class="input-container-evento">
+        <div formControlName="fecha" class="field col-12 md:col-12 mx:col-4">
+          <span class="p-float-label">
+            <p-calendar class="ui-datepicker fecha-input" [(ngModel)]="date3" [showIcon]="true" class="p-inputtext-sm" formControlName="fecha"></p-calendar>
+            <label>Fecha</label>
+          </span>
+        </div>
+      
+        <div formControlName="hora" class="field col-12 md:col-12 mx:col-4">
+          <span class="p-float-label">
+            <p-calendar class="hora-input" [(ngModel)]="time" [showIcon]="true" hourFormat="24" [showTime]="true" [timeOnly]="true" formControlName="hora"></p-calendar>
+            <label>Hora</label>
+          </span>
+        </div>
+              
+      </div>
+      
+      <style>
+      .fecha-input, .hora-input {
+        width: 90%;
+      }
+      </style>
+      
+      
+      
+      
+            <div class="button-container p-d-flex p-ai-center">
+              <button
+                pButton
+                pRipple
+                icon="pi pi-times"
+                type="button"
+                label="Cancelar"
+                class="p-button-raised p-button-danger"
+                (click)="onHideDialog()"
+              ></button>
+              <button
+                pButton
+                pRipple
+                type="submit"
+                icon="pi pi-check"
+                type="button"
+                (click)="evento()"
+                label="Guardar"
+                class="p-button-raised p-button-success"
+                [disabled]="miFormulario.invalid"
+              ></button>
+            </div>
+          </form>
+        </div>
+      </p-dialog>
+      
+
+    
