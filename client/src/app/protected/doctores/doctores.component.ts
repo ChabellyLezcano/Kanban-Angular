@@ -3,7 +3,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import Swal from 'sweetalert2';
+import { Doctores } from './interfaces/doctores.interface';
 import { DoctoresService } from './services/doctores.service';
+
 
 @Component({
   selector: 'app-doctores',
@@ -23,6 +25,8 @@ export class DoctoresComponent {
     const usr = this.authService.usuario;
     return usr;
   }
+
+  doctores: Doctores[] = [];
 
   miFormulario: FormGroup = this.fb.group({
     cabecera: ['Dra.', [Validators.required]],
@@ -81,4 +85,22 @@ export class DoctoresComponent {
         }
       );
   }
+
+
+  // Call the service to get the inventory list
+ ngOnInit(): void {
+  this.getDoctores();
+}
+
+
+getDoctores() {
+  this.doctoresService.getDoctores().subscribe(
+    (response) => {
+      this.doctores = response.doctores;
+    },
+    (error) => {
+      console.log('Error al obtener el inventario:', error);
+    }
+  );
+}
 }

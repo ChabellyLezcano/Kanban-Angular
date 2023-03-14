@@ -1,17 +1,20 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { EventoService } from '../eventos/services/evento.service';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import { Evento } from './interfaces/eventos.interfaces';
 
 @Component({
   selector: 'app-eventos',
   templateUrl: './eventos.component.html',
 })
-export class EventosComponent {
+export class EventosComponent implements OnInit{
   displayDialog = false; // provide an initializer here
+
+  eventos: Evento[] = [];
 
   time!: Date;
   date3!: Date;
@@ -59,6 +62,22 @@ export class EventosComponent {
       (error) => {
         console.log(error);
         Swal.fire('Error', error.error.msg, 'error');
+      }
+    );
+  }
+
+  ngOnInit(): void {
+    this.getEventos();
+  }
+  
+  
+  getEventos() {
+    this.eventoService.getEventos().subscribe(
+      (response) => {
+        this.eventos = response.evento;
+      },
+      (error) => {
+        console.log('Error al obtener el inventario:', error);
       }
     );
   }

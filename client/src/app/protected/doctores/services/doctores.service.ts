@@ -1,12 +1,14 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { DoctoresResponse } from '../interfaces/doctores.interface';
+import { Doctores, DoctoresResponse } from '../interfaces/doctores.interface';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DoctoresService {
+
+
 
   private baseUrl: string = environment.baseUrl;
 
@@ -40,5 +42,17 @@ export class DoctoresService {
     );
 
     return this.http.post<DoctoresResponse>(url, body, { headers });
+  }
+
+  //Listar doctores
+  getDoctores() {
+    const url = `${this.baseUrl}/doctor/listarDoctor`;
+  
+    const headers = new HttpHeaders().set(
+      'x-token',
+      localStorage.getItem('token') || ''
+    );
+  
+    return this.http.get<DoctoresResponse>(url, { headers });
   }
 }

@@ -20,6 +20,9 @@ import { FormsModule } from '@angular/forms';
 import { InventarioComponent } from './inventario/inventario.component';
 import { EstadisticasComponent } from './estadisticas/estadisticas.component';
 import { PresupuestosComponent } from './presupuestos/presupuestos.component';
+import {ToolbarModule} from 'primeng/toolbar';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
 
 @NgModule({
   declarations: [
@@ -42,7 +45,9 @@ import { PresupuestosComponent } from './presupuestos/presupuestos.component';
     ButtonModule,
     DialogModule, TableModule,
     TreeSelectModule,
-    FormsModule
+    FormsModule,
+    ToolbarModule,
+    FontAwesomeModule
   ]
 })
 export class ProtectedModule { }

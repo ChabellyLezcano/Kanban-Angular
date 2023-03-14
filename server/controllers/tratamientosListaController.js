@@ -3,28 +3,48 @@ const TratamientoLista = require("../models/TratamientoLista");
 const { db } = require("../models/TratamientoLista");
 
 const crearTratamientoLista = async (req, res = response) => {
-  const { name, categoria, precio } = req.body;
+  try {
+    const { name, categoria, precio } = req.body;
 
-  // Comprobar si ya existe un tratamiento con el mismo nombre
-  const existingTratamiento = await TratamientoLista.findOne({ name });
-  if (existingTratamiento) {
-    return res.status(400).json({ msg: "El tratamiento ya existe" });
-  }
-  const { uid } = req;
+    const { uid } = req;
   const usuario =  uid;
 
-  // Crear el nuevo tratamiento
-  const tratamiento = new TratamientoLista({ name, categoria, precio, usuario});
-  await tratamiento.save();
+    // create a new instance of a Doctor
+    const tratamientoLista = new TratamientoLista({
+      name, categoria, precio, usuario
+    });
 
-  res.json({ msg: "Tratamiento creado con éxito", tratamiento });
+    const tratamientoExistente = await TratamientoLista.findOne({ name });
+
+  if ( tratamientoExistente ) {
+      return res.status(400).json({
+          ok: false,
+          msg: 'El tratamiento ya existe'
+      });
+  } 
+
+    // save the Doctor to the database
+    await tratamientoLista.save();
+
+    // send the Doctor object as a response
+    res.status(201).json({
+      ok: true,
+      msg: "Tratamiento creado exitosamente",
+      tratamientoLista
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      msg: "Error al crear tratamiento",
+    });
+  }
 };
 
 const borrarTratamientoLista = async (req, res = response) => {
   const { id } = req.params;
 
   try {
-    const tratamiento = await TratamientoLista.findByIdAndDelete("6404a0da444c2ebbd10f08e4");
+    const tratamiento = await TratamientoLista.findByIdAndDelete({id});
     if (!tratamiento) {
       return res.status(404).json({
         ok: false,
@@ -84,13 +104,21 @@ const actualizarTratamientoLista = async (req, res = response) => {
 
 
 const listarTratamientoLista = async (req, res = response) => {
-    try {
-        const tratamientos = await TratamientoLista.find({});
-        res.json(tratamientos);
-      } catch (error) {
-        console.log(error);
-        res.status(500).json({ msg: 'Hubo un error al obtener los tratamientos' });
-      }
+  const { uid } = req;
+    const usuario =  uid;
+  try {
+
+    const tratamientos = await TratamientoLista.find({usuario});
+    res.json({
+      tratamientos
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      ok: false,
+      msg: 'Error al listar tratamientos'
+    });
+  }
 };
 
 module.exports = {

@@ -4,6 +4,7 @@ import { AuthService } from 'src/app/auth/services/auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { TratamientosService } from './services/tratamientos.service';
+import { Tratamiento } from './interfaces/tratamientos.interfaces';
 
 @Component({
   selector: 'app-tratamientos',
@@ -15,6 +16,8 @@ export class TratamientosComponent {
   get usuario() {
     return this.authService.usuario;
   }
+
+  tratamientos: Tratamiento[] = [];
 
   miFormulario: FormGroup = this.fb.group({
     name: ['Ortodoncia infantil', [Validators.required]],
@@ -60,4 +63,21 @@ export class TratamientosComponent {
     }
     );
   }
+
+   // Call the service to get the inventory list
+ ngOnInit(): void {
+  this.getTratamiento();
+}
+
+
+getTratamiento() {
+  this.tratamientoService.getTratamientos().subscribe(
+    (response) => {
+      this.tratamientos = response.tratamientos;
+    },
+    (error) => {
+      console.log('Error al obtener el inventario:', error);
+    }
+  );
+}
 }

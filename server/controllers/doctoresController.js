@@ -9,7 +9,6 @@ const crearDoctor = async (req, res = response) => {
       const { uid } = req;
     const usuario =  uid;
 
-
       // create a new instance of a Doctor
       const doctor = new Doctor({
         foto,
@@ -23,8 +22,6 @@ const crearDoctor = async (req, res = response) => {
         dni,
         usuario
       });
-
-      
 
       const doctorExistenteDNI = await Doctor.findOne({ dni });
 
@@ -148,8 +145,11 @@ const crearDoctor = async (req, res = response) => {
   
   
   const listarDoctores = async (req, res = response) => {
+    const { uid } = req;
+    const usuario =  uid;
+
     try {
-      const doctores = await Doctor.find();
+      const doctores = await Doctor.find({usuario});
       res.status(200).json({
         ok: true,
         doctores

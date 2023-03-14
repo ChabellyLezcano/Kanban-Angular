@@ -13,6 +13,7 @@ import {TreeSelectModule} from 'primeng/treeselect';
 import {InputTextareaModule} from 'primeng/inputtextarea';
 import {CalendarModule} from 'primeng/calendar';
 import { FormsModule } from '@angular/forms';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { FormsModule } from '@angular/forms';
     TreeSelectModule,
     InputTextareaModule,
     CalendarModule,
-    FormsModule
+    FormsModule,
+    FontAwesomeModule
   
   ],
   providers: [],

@@ -26,4 +26,16 @@ export class TratamientosService {
 
     return this.http.post<TratamientosResponse>(url, body, { headers });
   }
+
+  //Listar tratamientos
+  getTratamientos() {
+    const url = `${this.baseUrl}/tratamientoLista/listarTratamientoLista`;
+  
+    const headers = new HttpHeaders().set(
+      'x-token',
+      localStorage.getItem('token') || ''
+    );
+  
+    return this.http.get<TratamientosResponse>(url, { headers });
+  }
 }

@@ -17,8 +17,7 @@ const TratamientoListaSchema = Schema({
   usuario: {
     type: Schema.Types.ObjectId,
     ref: 'Usuario',
-    required: true,
-    unique: true
+    required: true
   }
 });
 

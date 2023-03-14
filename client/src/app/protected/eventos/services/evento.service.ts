@@ -33,4 +33,16 @@ export class EventoService {
 
     return this.http.post<EventosResponse>(url, body, { headers });
   }
+
+  //Listar productos
+  getEventos() {
+    const url = `${this.baseUrl}/eventos/listarEvento`;
+  
+    const headers = new HttpHeaders().set(
+      'x-token',
+      localStorage.getItem('token') || ''
+    );
+  
+    return this.http.get<EventosResponse>(url, { headers });
+  }
 }

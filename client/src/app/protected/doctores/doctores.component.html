@@ -138,4 +138,36 @@
       </p-dialog>
       
 
+      <ul>
+        <li *ngFor="let doctor of doctores">
+          <div class="card">
+            <div class="card-img" style="background-color: #c4c4c4;">
+              <div class="frame">
+                <img src="https://via.placeholder.com/150" alt="Profile Picture">
+              </div>
+            </div>
+            <div class="card-content">
+              <h2>{{doctor.name}} {{doctor.apellidos}}</h2>
+              <h3>{{doctor.especialidad}}</h3>
+              <ul class="contact-info">
+                <li><strong>Correo:</strong> {{doctor.email}}</li>
+                <li><strong>Número de colegiado: </strong> {{doctor.numColegiado}}</li>
+              </ul>
+              <div class="icon-container">
+                <i class="pi pi-trash custom-icon-trash icon"></i>
+                <i class="pi pi-info-circle custom-icon-info icon"></i>
+                <i class="pi pi-envelope custom-icon-envelop icon"></i>
+                <i class="pi pi-file-edit custom-icon-edit icon"></i>
+          </div>
+      
+                
+            </div>
+          </div>
+        </li>
+      </ul>
+
+
+     
     
+
+      
