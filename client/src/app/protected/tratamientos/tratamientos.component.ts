@@ -18,6 +18,9 @@ export class TratamientosComponent {
   }
 
   tratamientos: Tratamiento[] = [];
+  globalFilter: string;
+  rowsOptions = [10, 50, 100];
+rows = 10;
 
   miFormulario: FormGroup = this.fb.group({
     name: ['Ortodoncia infantil', [Validators.required]],
@@ -30,7 +33,7 @@ export class TratamientosComponent {
     private authService: AuthService,
     private fb: FormBuilder,
     private tratamientoService: TratamientosService
-  ) {}
+  ) { this.globalFilter = ''; }
 
   showModalDialog() {
     this.displayDialog = true;
@@ -56,6 +59,7 @@ export class TratamientosComponent {
     Swal.fire('Éxito', 'Tratamiento creado correctamente', 'success');
     this.router.navigateByUrl('/tratamientos');
     this.displayDialog = false;
+    this.getTratamiento();
     },
     (error) => {
     console.log(error);
@@ -80,4 +84,43 @@ getTratamiento() {
     }
   );
 }
+  // Implement the search function
+  applyGlobalFilter() {
+    this.tratamientos = this.tratamientos.filter((tratamiento: Tratamiento) => {
+      return tratamiento.name.toLowerCase().includes(this.globalFilter.toLowerCase()) ||
+             tratamiento.categoria.toLowerCase().includes(this.globalFilter.toLowerCase()) ||
+             tratamiento.precio.toString().toLowerCase().includes(this.globalFilter.toLowerCase());
+    });
+  }
+
+  onRowsChange(value: number) {
+    this.rows = value;
+  }
+
+
+  deleteTratamiento(_id: string) {
+    Swal.fire({
+      title: '¿Está seguro?',
+      text: 'Esta acción no se puede deshacer',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, eliminar',
+      cancelButtonText: 'Cancelar',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.tratamientoService.deleteTratamiento(_id).subscribe(
+          () => {
+            Swal.fire('Eliminado', 'Doctor eliminado correctamente', 'success');
+            this.getTratamiento(); // refresh the doctor's list after deletion
+          },
+          (error) => {
+            console.log(error);
+            Swal.fire('Error', error.error.msg, 'error');
+          }
+        );
+      }
+    });
+  }
 }

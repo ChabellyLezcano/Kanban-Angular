@@ -55,6 +55,7 @@ app.use("/api/doctor", require("./routes/doctores"));
 app.use("/api/presupuestos", require("./routes/presupuestos"));
 app.use("/api/eventos", require("./routes/eventos"));
 app.use("/api/inventario", require("./routes/inventario"));
+app.use("/api/cita", require("./routes/citas"));
 
 //Inicio del servidor
 app.listen(process.env.PORT, () => {

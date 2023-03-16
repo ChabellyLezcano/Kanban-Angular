@@ -27,7 +27,7 @@ router.post(
 );
 
 // Borrar tartamiento
-router.delete("/deleteTratamientoLista/:id", borrarTratamientoLista);
+router.delete("/deleteTratamientoLista/:id", validarJWT, borrarTratamientoLista);
 
 // Actualizar tratamiento
 router.put(
@@ -38,6 +38,7 @@ router.put(
     check("precio", "El campo del precio está vacío").notEmpty(),
     check("precio", "El campo del precio debe ser un número").isNumeric(),
     validarCampos,
+    validarJWT
   ],
   actualizarTratamientoLista
 );

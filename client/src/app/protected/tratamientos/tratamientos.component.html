@@ -1,18 +1,4 @@
-<p>tratamientos works!</p>
-
-<h4>User info</h4>
-<pre>{{ usuario | json }}</pre>
-
-
-<button
-  pButton
-  pRipple
-  type="button"
-  (click)="showModalDialog()"
-  icon="pi pi-plus"
-  label="Añadir tratamiento"
-  class="p-button-primary"
-></button>
+<div class="card-tratamientos" >
 
 <p-dialog
   [(visible)]="displayDialog"
@@ -24,8 +10,12 @@
   [draggable]="true"
   (onHide)="onHideDialog()"
 >
-  <div>
-    <form autocomplete="off" [formGroup]="miFormulario" (ngSubmit)="tratamiento()">
+  <div >
+    <form 
+      autocomplete="off"
+      [formGroup]="miFormulario"
+      (ngSubmit)="tratamiento()"
+    >
       <h2 class="title-tratamiento">Introduzca los datos necesarios</h2>
       <div class="input-container-tratamiento">
         <span class="p-float-label">
@@ -52,7 +42,6 @@
         </span>
       </div>
       <div class="input-container-tratamiento">
-        
         <span class="p-float-label">
           <input
             type="text"
@@ -63,7 +52,7 @@
           <label for="float-input">Precio</label>
         </span>
       </div>
-      <div class="button-container p-d-flex p-ai-center">
+      <div class="button-container-tratamientos p-d-flex p-ai-center">
         <button
           pButton
           pRipple
@@ -89,6 +78,73 @@
   </div>
 </p-dialog>
 
-<ul>
-  <li *ngFor="let tratamiento of tratamientos">{{ tratamiento.name }}</li>
-</ul>
+<!-- Add a table component to your HTML template -->
+<div style="display: flex; justify-content: space-between; align-items: center;">
+  <div class="p-inputgroup">
+    <input
+      type="text"
+      pInputText
+      placeholder="Buscar..."
+      [(ngModel)]="globalFilter"
+      (input)="applyGlobalFilter()"
+      style="max-width: 400px; text-align: left;"
+    />
+    <button pButton icon="pi pi-search" class="p-button-secondary" (click)="applyGlobalFilter()"></button>
+  </div>
+
+  <button
+    pButton
+    pRipple
+    type="button"
+    (click)="showModalDialog()"
+    icon="pi pi-plus"
+    label="Añadir tratamiento"
+    class="p-button-primary"
+  ></button>
+
+  <div style="display: flex; align-items: right;">
+    <p-dropdown [options]="rowsOptions" [(ngModel)]="rows" (onChange)="onRowsChange($event.value)" style="margin-left: 10px;"></p-dropdown>
+  </div>
+</div>
+
+<p-table
+  [value]="tratamientos"
+  [paginator]="true"
+  [rows]="rows"
+  [responsive]="true"
+  class="table"
+>
+  <ng-template pTemplate="header">
+    <tr>
+      <th>
+        <p-columnFilter type="text" field="name"></p-columnFilter>
+        Nombre
+      </th>
+      <th>
+        <p-columnFilter type="text" field="categoria"></p-columnFilter>
+        Categoría
+      </th>
+      <th>
+        <p-columnFilter type="number" field="precio"></p-columnFilter>
+        Precio
+      </th>
+      <th>
+        <p-columnFilter field="accion"></p-columnFilter>
+       Accion
+      </th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-tratamiento>
+    <tr>
+      <td>{{ tratamiento.name }}</td>
+      <td>{{ tratamiento.categoria }}</td>
+      <td>{{ tratamiento.precio }} €</td>
+      <td class="p-d-flex p-jc-center">
+        <i style="padding-right: 14px;" class="pi pi-trash custom-icon-trash icon" (click)="deleteTratamiento(tratamiento._id)"></i>
+        <i style="padding: 10px;" class="pi pi-file-edit custom-icon-edit icon"></i>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+</div>
+<!-- Add a search input field and a button to trigger the search function -->

@@ -38,4 +38,15 @@ export class TratamientosService {
   
     return this.http.get<TratamientosResponse>(url, { headers });
   }
+
+   // Borrar tratamiento
+
+deleteTratamiento(_id: string) {
+  const url = `${this.baseUrl}/tratamientoLista/deleteTratamientoLista/${_id}`;
+  const headers = new HttpHeaders().set(
+    'x-token',
+    localStorage.getItem('token') || ''
+  );
+  return this.http.delete(url, { headers });
+}
 }

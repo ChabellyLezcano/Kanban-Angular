@@ -146,10 +146,9 @@ const crearDoctor = async (req, res = response) => {
   
   const listarDoctores = async (req, res = response) => {
     const { uid } = req;
-    const usuario =  uid;
 
     try {
-      const doctores = await Doctor.find({usuario});
+      const doctores = await Doctor.find({usuario: uid});
       res.status(200).json({
         ok: true,
         doctores

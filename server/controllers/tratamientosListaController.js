@@ -41,10 +41,10 @@ const crearTratamientoLista = async (req, res = response) => {
 };
 
 const borrarTratamientoLista = async (req, res = response) => {
-  const { id } = req.params;
+  const idTratamiento = req.params.id;
 
   try {
-    const tratamiento = await TratamientoLista.findByIdAndDelete({id});
+    const tratamiento = await TratamientoLista.deleteOne({ _id: idTratamiento});
     if (!tratamiento) {
       return res.status(404).json({
         ok: false,
@@ -106,7 +106,6 @@ const actualizarTratamientoLista = async (req, res = response) => {
 const listarTratamientoLista = async (req, res = response) => {
   try {
     const { uid } = req;
-    console.log(uid)
     const tratamientos = await TratamientoLista.find({ usuario: uid });
     res.json({
       ok: true,

@@ -14,6 +14,7 @@ import {InputTextareaModule} from 'primeng/inputtextarea';
 import {CalendarModule} from 'primeng/calendar';
 import { FormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { TableModule } from 'primeng/table';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     InputTextareaModule,
     CalendarModule,
     FormsModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    TableModule
   
   ],
   providers: [],
