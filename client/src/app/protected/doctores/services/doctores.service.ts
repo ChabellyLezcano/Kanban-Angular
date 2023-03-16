@@ -78,4 +78,12 @@ deleteDoctor(_id: string) {
     return this.http.get<DoctoresResponse>(url, { headers });
   }
 
+  //Servicio editar doctor por id
+  editarDoctor(id: string, doctor: Doctores) {
+    const url = `${this.baseUrl}/doctor/actualizarDoctor/${id}`;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+    return this.http.put<DoctoresResponse>(url, doctor, { headers });
+  }
 }

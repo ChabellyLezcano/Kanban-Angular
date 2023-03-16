@@ -13,7 +13,8 @@ import { DoctoresService } from './services/doctores.service';
 })
 export class DoctoresComponent {
   displayDialog = false; // provide an initializer here
-
+  displayEditDialog = false; // add this variable
+  
   opcionesCabecera = [
     { value: 'Dr.', label: 'Dr.' },
     { value: 'Dra.', label: 'Dra.' }
@@ -156,6 +157,8 @@ verDoctor(id: string) {
     }
   );
 }
+
+//Editar doctor por Id
 
 
 }

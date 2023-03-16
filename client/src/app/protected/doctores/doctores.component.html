@@ -163,14 +163,14 @@
             (click)="verDoctor(doctor._id)"
           ></i>
           <i class="pi pi-envelope custom-icon-envelop icon"></i>
-          <i class="pi pi-file-edit custom-icon-edit icon"></i>
+          <i class="pi pi-file-edit custom-icon-edit icon" ></i>
         </div>
       </div>
     </div>
   </li>
 </ul>
 
-<p-dialog [(visible)]="doctorSeleccionado" [responsive]="true" [modal]="true" [closable]="true" [closeOnEscape]="true" [dismissableMask]="true" [draggable]="true" (onHide)="doctorSeleccionado = null">
+<p-dialog [(visible)]="doctorSeleccionado" [responsive]="true"  [closable]="true" [closeOnEscape]="true" [dismissableMask]="true" [draggable]="true" (onHide)="doctorSeleccionado = null">
   <div>
     <h2>{{ doctorSeleccionado?.name }} {{ doctorSeleccionado?.apellidos }}</h2>
     <p>Especialidad: {{ doctorSeleccionado?.especialidad }}</p>
@@ -180,3 +180,4 @@
     <p>DNI: {{ doctorSeleccionado?.dni }}</p>
     </div>
     </p-dialog>
+

@@ -104,19 +104,19 @@ const actualizarTratamientoLista = async (req, res = response) => {
 
 
 const listarTratamientoLista = async (req, res = response) => {
-  const { uid } = req;
-    const usuario =  uid;
   try {
-
-    const tratamientos = await TratamientoLista.find({usuario});
+    const { uid } = req;
+    console.log(uid)
+    const tratamientos = await TratamientoLista.find({ usuario: uid });
     res.json({
+      ok: true,
       tratamientos
     });
   } catch (error) {
     console.log(error);
     res.status(500).json({
       ok: false,
-      msg: 'Error al listar tratamientos'
+      msg: "Error al obtener tratamientos",
     });
   }
 };

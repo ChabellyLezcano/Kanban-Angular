@@ -44,6 +44,6 @@ router.put(
 
 // Ver tratamiento
 
-router.get("/listarTratamientoLista", listarTratamientoLista);
+router.get("/listarTratamientoLista", validarJWT, listarTratamientoLista);
 
 module.exports = router;
