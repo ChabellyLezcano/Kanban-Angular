@@ -55,4 +55,27 @@ export class DoctoresService {
   
     return this.http.get<DoctoresResponse>(url, { headers });
   }
+
+  // Borrar doctor
+
+deleteDoctor(_id: string) {
+  const url = `${this.baseUrl}/doctor/deleteDoctor/${_id}`;
+  const headers = new HttpHeaders().set(
+    'x-token',
+    localStorage.getItem('token') || ''
+  );
+  return this.http.delete(url, { headers });
+}
+
+  // Ver doctor
+  getDoctorById(_id: string) {
+    const url = `${this.baseUrl}/doctor/verDoctor/${_id}`;
+    const headers = new HttpHeaders().set(
+      'x-token',
+      localStorage.getItem('token') || ''
+    );
+    console.log(_id)
+    return this.http.get<DoctoresResponse>(url, { headers });
+  }
+
 }

@@ -6,7 +6,7 @@ const DoctorSchema = Schema({
         type: String,
         require: false 
       },
-      cabecera: {
+    cabecera: {
         type: String,
         require: false 
       },

@@ -23,7 +23,7 @@ router.post(
 );
 
 // Borrar perfil
-router.delete("/deleteDoctor/:id", borrarDoctor);
+router.delete("/deleteDoctor/:id", validarJWT, borrarDoctor);
 
 // Actualizar perfil
 router.put(

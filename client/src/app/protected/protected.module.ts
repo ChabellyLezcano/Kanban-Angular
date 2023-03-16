@@ -22,6 +22,8 @@ import { EstadisticasComponent } from './estadisticas/estadisticas.component';
 import { PresupuestosComponent } from './presupuestos/presupuestos.component';
 import {ToolbarModule} from 'primeng/toolbar';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { PanelModule } from 'primeng/panel';
+import { DropdownModule } from 'primeng/dropdown';
 
 
 @NgModule({
@@ -47,7 +49,10 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     TreeSelectModule,
     FormsModule,
     ToolbarModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    PanelModule,
+    DropdownModule
+    
   ]
 })
 export class ProtectedModule { }

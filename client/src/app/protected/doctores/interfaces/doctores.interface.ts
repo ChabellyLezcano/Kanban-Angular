@@ -5,6 +5,7 @@ export interface DoctoresResponse {
 
 export interface Doctores {
     _id:            string;
+    cabecera:       string;
     name:           string;
     apellidos:      string;
     email:          string;

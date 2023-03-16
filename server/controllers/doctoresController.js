@@ -121,9 +121,9 @@ const crearDoctor = async (req, res = response) => {
     const id = req.params.id;
   
     try {
-      const doctor = await Doctor.findById(id);
+      const doctores = await Doctor.findById(id);
   
-      if (!doctor) {
+      if (!doctores) {
         return res.status(404).json({
           ok: false,
           msg: "Doctor not found",
@@ -132,7 +132,7 @@ const crearDoctor = async (req, res = response) => {
   
       res.json({
         ok: true,
-        doctor,
+        doctores,
       });
     } catch (error) {
       console.log(error);
