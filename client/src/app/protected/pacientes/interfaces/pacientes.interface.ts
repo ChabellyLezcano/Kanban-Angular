@@ -1,4 +1,5 @@
 export interface PacientesResponse {
+    ok:       boolean;
     pacientes: Paciente[];
 }
 

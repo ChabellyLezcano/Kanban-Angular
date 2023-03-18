@@ -11,11 +11,20 @@ import { Paciente } from './interfaces/pacientes.interface';
 })
 export class PacientesComponent implements OnInit {
   displayDialog = false;
+  displayEditDialog = false; // add this variable
+
   globalFilter: string;
   rowsOptions = [10, 50, 100];
   rows = 10;
 
-  displayModal = false;
+
+   showModalDialog() {
+    this.displayDialog = true;
+  }
+
+  onHideDialog() {
+    this.displayDialog = false;
+  }
 
   pacientes: Paciente[] = [];
   pacienteSeleccionado: any;
@@ -40,13 +49,7 @@ export class PacientesComponent implements OnInit {
     this.globalFilter = '';
   }
 
-  showModalDialog() {
-    this.displayDialog = true;
-  }
-
-  onHideDialog() {
-    this.displayDialog = false;
-  }
+ 
 
   addPaciente() {
     console.log(this.miFormulario.value);
@@ -90,6 +93,10 @@ export class PacientesComponent implements OnInit {
       );
   }
 
+    ngOnInit(): void {
+    this.getPacientes();
+  }
+
   getPacientes() {
     this.pacientesService.getPaciente().subscribe(
       (response) => {
@@ -103,9 +110,7 @@ export class PacientesComponent implements OnInit {
     );
   }
 
-  ngOnInit(): void {
-    this.getPacientes();
-  }
+
 
   deletePaciente(_id: string) {
     Swal.fire({
@@ -149,21 +154,13 @@ verPaciente(id: string) {
   this.pacientesService.getPacienteById(id).subscribe(
     (response) => {
       console.log(response); // Aquí podemos mostrar la respuesta en la consola o asignarla a una variable en el componente
-      // Por ejemplo:
-      const paciente = response.pacientes;
-      if (paciente) {
-        // Asignamos el doctor encontrado a la propiedad doctorSeleccionado
-        this.pacienteSeleccionado = paciente;
-        console.log(this.pacienteSeleccionado);
-        
-      }
+      // Asignamos los valores del paciente encontrado a la propiedad pacienteSeleccionado
+      this.pacienteSeleccionado = response;
     },
     (error) => {
       console.log('Error al obtener el paciente:', error);
     }
-    
   );
-  this.displayModal = true;
 }
 
 }

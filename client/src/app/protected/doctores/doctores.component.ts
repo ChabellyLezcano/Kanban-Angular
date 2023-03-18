@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import Swal from 'sweetalert2';
-import { Doctores, DoctoresResponse } from './interfaces/doctores.interface';
+import { Doctores } from './interfaces/doctores.interface';
 import { DoctoresService } from './services/doctores.service';
 
 
