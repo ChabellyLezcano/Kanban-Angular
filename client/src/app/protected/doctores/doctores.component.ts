@@ -153,7 +153,7 @@ verDoctor(id: string) {
       }
     },
     (error) => {
-      console.log('Error al obtener el doctor:', error);
+      console.log('Error al obtener el pacinete:', error);
     }
   );
 }

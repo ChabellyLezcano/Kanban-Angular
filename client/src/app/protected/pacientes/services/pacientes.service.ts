@@ -59,5 +59,25 @@ export class PacientesService {
     return this.http.get<PacientesResponse>(url, { headers });
   }
 
+  //Borrar paciente
+  deletePaciente(_id: string) {
+    const url = `${this.baseUrl}/paciente/deletePaciente/${_id}`;
+    const headers = new HttpHeaders().set(
+      'x-token',
+      localStorage.getItem('token') || ''
+    );
+    return this.http.delete(url, { headers });
+  }
+
+   // Ver Paciente
+   getPacienteById(_id: string) {
+    const url = `${this.baseUrl}/paciente/verPaciente/${_id}`;
+    const headers = new HttpHeaders().set(
+      'x-token',
+      localStorage.getItem('token') || ''
+    );
+    return this.http.get<PacientesResponse>(url, { headers });
+  }
+
 }
 

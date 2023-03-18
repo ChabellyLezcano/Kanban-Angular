@@ -105,8 +105,8 @@ const borrarPaciente = async (req, res = response) => {
 
 const verPaciente = async (req, res = response) => {
     try {
-        const pacienteId = req.query.id; // obtener el ID del paciente desde la consulta
-        const paciente = await Paciente.findById(pacienteId); // buscar el paciente en la base de datos
+      const id = req.params.id; // obtener el ID del paciente desde la consulta
+        const paciente = await Paciente.findById(id); // buscar el paciente en la base de datos
         if (!paciente) {
           res.status(404).json({ message: 'Paciente no encontrado' }); // devolver un error 404 si no se encuentra el paciente
         } else {

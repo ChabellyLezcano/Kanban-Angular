@@ -1,144 +1,264 @@
-<button
-  pButton
-  pRipple
-  type="button"
-  (click)="showModalDialog()"
-  icon="pi pi-plus"
-  label="Añadir paciente"
-  class="p-button-primary"
-></button>
+<div class="card-tratamientos">
+  <p-dialog
+    [(visible)]="displayDialog"
+    [responsive]="true"
+    [modal]="true"
+    [closable]="true"
+    [closeOnEscape]="true"
+    [dismissableMask]="true"
+    [draggable]="true"
+    (onHide)="onHideDialog()"
+  >
+    <div>
+      <form
+        autocomplete="off"
+        [formGroup]="miFormulario"
+        (ngSubmit)="addPaciente()"
+      >
+        <h2 class="title-paciente">Introduzca los datos necesarios</h2>
+        <div class="input-container-paciente">
+          <span class="p-float-label">
+            <input
+              id="float-input"
+              type="text"
+              formControlName="name"
+              pInputText
+            />
+            <label for="float-input">Nombre</label>
+          </span>
+          <span class="p-float-label">
+            <input
+              id="float-input"
+              type="text"
+              formControlName="apellidos"
+              class="custom-input-paciente-1"
+              pInputText
+            />
+            <label for="float-input">Apellidos</label>
+          </span>
+        </div>
+        <div class="input-container-paciente">
+          <span class="p-float-label">
+            <input
+              type="text"
+              class="custom-paciente-input-2"
+              formControlName="email"
+              pInputText
+            />
+            <label for="float-input">Email</label>
+          </span>
+        </div>
+        <div class="input-container-paciente">
+          <span class="p-float-label">
+            <input
+              type="text"
+              class="custom-paciente-input-2"
+              formControlName="direccion"
+              pInputText
+            />
+            <label for="float-input">Dirección</label>
+          </span>
+        </div>
+
+        <div class="input-container-paciente">
+          <span class="p-float-label">
+            <input
+              id="float-input"
+              type="text"
+              formControlName="telefono_movil"
+              pInputText
+            />
+            <label for="float-input">Teléfono Móvil</label>
+          </span>
+          <span class="p-float-label">
+            <input
+              id="float-input"
+              type="text"
+              formControlName="dni"
+              pInputText
+            />
+            <label for="float-input">DNI</label>
+          </span>
+          <span class="p-float-label">
+            <input
+              id="float-input"
+              type="text"
+              formControlName="cp"
+              pInputText
+            />
+            <label for="float-input">CP</label>
+          </span>
+        </div>
+
+        <div class="input-container-paciente">
+          <span class="p-float-label">
+            <input
+              id="float-input"
+              type="text"
+              formControlName="municipio"
+              pInputText
+              class="custom-paciente-input-3"
+            />
+            <label for="float-input">Municipio</label>
+          </span>
+          <span class="p-float-label">
+            <input
+              id="float-input"
+              type="text"
+              formControlName="provincia"
+              pInputText
+              class="custom-paciente-input-3"
+            />
+            <label for="float-input">Provincia</label>
+          </span>
+        </div>
+        <div class="button-container p-d-flex p-ai-center">
+          <button
+            pButton
+            pRipple
+            icon="pi pi-times"
+            type="button"
+            label="Cancelar"
+            class="p-button-raised p-button-danger"
+            (click)="onHideDialog()"
+          ></button>
+          <button
+            pButton
+            pRipple
+            type="submit"
+            (click)="addPaciente()"
+            icon="pi pi-check"
+            type="button"
+            label="Guardar"
+            class="p-button-raised p-button-success"
+            [disabled]="miFormulario.invalid"
+          ></button>
+        </div>
+      </form>
+    </div>
+  </p-dialog>
+
+  <div class="container">
+    <div class="search-bar">
+      <div class="p-inputgroup">
+        <input
+          type="text"
+          pInputText
+          placeholder="Buscar..."
+          [(ngModel)]="globalFilter"
+          (input)="applyGlobalFilter()"
+          class="search-input"
+        />
+        <button
+          pButton
+          icon="pi pi-search"
+          class="p-button-secondary"
+          (click)="applyGlobalFilter()"
+          aria-label="Buscar"
+        ></button>
+      </div>
+      <button
+        pButton
+        pRipple
+        type="button"
+        (click)="showModalDialog()"
+        icon="pi pi-plus"
+        label="Añadir paciente"
+        class="p-button-primary"
+      ></button>
+    </div>
+
+    <div class="dropdown-container">
+      <div class="p-field">
+        <p-dropdown
+          [options]="rowsOptions"
+          [(ngModel)]="rows"
+          (onChange)="onRowsChange($event.value)"
+          id="rows"
+          aria-label="Seleccionar cantidad de filas"
+        ></p-dropdown>
+      </div>
+    </div>
+  </div>
+
+  <p-table
+    [value]="pacientes"
+    [paginator]="true"
+    [rows]="rows"
+    [responsive]="true"
+    class="table"
+    role="table"
+  >
+    <ng-template pTemplate="header" role="rowgroup">
+      <tr role="row">
+        <th role="columnheader">
+          <p-columnFilter type="text" field="name"></p-columnFilter>
+          Nombre
+        </th>
+        <th role="columnheader">
+          <p-columnFilter type="text" field="apellidos"></p-columnFilter>
+          Apellidos
+        </th>
+        <th role="columnheader">
+          <p-columnFilter type="text" field="email"></p-columnFilter>
+          Email
+        </th>
+        <th role="columnheader">Accion</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-paciente role="rowgroup">
+      <tr role="row">
+        <td role="cell">{{ paciente.name }}</td>
+        <td role="cell">{{ paciente.apellidos }}</td>
+        <td role="cell">{{ paciente.email }}</td>
+        <td role="cell" class="p-d-flex p-jc-center">
+          <i
+            style="padding-right: 14px"
+            class="pi pi-trash custom-icon-trash icon"
+            (click)="deletePaciente(paciente._id)"
+            aria-label="Eliminar paciente"
+          ></i>
+          <i
+            style="padding-right: 14px"
+            class="pi pi-file-edit custom-icon-edit icon"
+            aria-label="Editar paciente"
+          ></i>
+          <i
+            class="pi pi-eye custom-icon-info icon"
+            (click)="verPaciente(paciente._id)"
+          ></i>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
 
 <p-dialog
-  [(visible)]="displayDialog"
+  [(visible)]="pacienteSeleccionado"
   [responsive]="true"
-  [modal]="true"
   [closable]="true"
   [closeOnEscape]="true"
   [dismissableMask]="true"
   [draggable]="true"
-  (onHide)="onHideDialog()"
+  (onHide)="pacienteSeleccionado = null"
 >
   <div>
-    <form autocomplete="off" [formGroup]="miFormulario" (ngSubmit)="paciente()">
-      <h2 class="title-paciente">Introduzca los datos necesarios</h2>
-      <div class="input-container-paciente">
-        <span class="p-float-label">
-          <input
-            id="float-input"
-            type="text"
-            formControlName="name"
-            pInputText
-          />
-          <label for="float-input">Nombre</label>
-        </span>
-        <span class="p-float-label">
-          <input
-            id="float-input"
-            type="text"
-            formControlName="apellidos"
-            class="custom-input-paciente-1"
-            pInputText
-          />
-          <label for="float-input">Apellidos</label>
-        </span>
-      </div>
-      <div class="input-container-paciente">
-        <span class="p-float-label">
-          <input
-            type="text"
-            class="custom-paciente-input-2"
-            formControlName="email"
-            pInputText
-          />
-          <label for="float-input">Email</label>
-        </span>
-      </div>
-      <div class="input-container-paciente">
-        <span class="p-float-label">
-          <input
-            type="text"
-            class="custom-paciente-input-2"
-            formControlName="direccion"
-            pInputText
-          />
-          <label for="float-input">Dirección</label>
-        </span>
-      </div>
-
-      <div class="input-container-paciente">
-        <span class="p-float-label">
-          <input
-            id="float-input"
-            type="text"
-            formControlName="telefono_movil"
-            pInputText
-          />
-          <label for="float-input">Teléfono Móvil</label>
-        </span>
-        <span class="p-float-label">
-          <input
-            id="float-input"
-            type="text"
-            formControlName="dni"
-            pInputText
-          />
-          <label for="float-input">DNI</label>
-        </span>
-        <span class="p-float-label">
-          <input id="float-input" type="text" formControlName="cp" pInputText />
-          <label for="float-input">CP</label>
-        </span>
-      </div>
-
-      <div class="input-container-paciente">
-        <span class="p-float-label">
-          <input
-            id="float-input"
-            type="text"
-            formControlName="municipio"
-            pInputText
-            class="custom-paciente-input-3"
-          />
-          <label for="float-input">Municipio</label>
-        </span>
-        <span class="p-float-label">
-          <input
-            id="float-input"
-            type="text"
-            formControlName="provincia"
-            pInputText
-            class="custom-paciente-input-3"
-          />
-          <label for="float-input">Provincia</label>
-        </span>
-      </div>
-      <div class="button-container p-d-flex p-ai-center">
-        <button
-          pButton
-          pRipple
-          icon="pi pi-times"
-          type="button"
-          label="Cancelar"
-          class="p-button-raised p-button-danger"
-          (click)="onHideDialog()"
-        ></button>
-        <button
-          pButton
-          pRipple
-          type="submit"
-          (click)="paciente()"
-          icon="pi pi-check"
-          type="button"
-          label="Guardar"
-          class="p-button-raised p-button-success"
-          [disabled]="miFormulario.invalid"
-        ></button>
-      </div>
-    </form>
+    <h2>
+      {{ pacienteSeleccionado?.name }} {{ pacienteSeleccionado?.apellidos }}
+    </h2>
+    <p>Correo electrónico: {{ pacienteSeleccionado?.email }}</p>
+    <p>Número de colegiado: {{ pacienteSeleccionado?.numColegiado }}</p>
+    <p>DNI: {{ pacienteSeleccionado?.dni }}</p>
   </div>
 </p-dialog>
 
+<style>
+  .container {
+    display: flex;
+  }
 
-<ul>
-  <li *ngFor="let paciente of pacientes">{{ paciente.name }}</li>
-</ul>
+  .search-bar,
+  .dropdown-container {
+    flex-grow: 1;
+  }
+</style>

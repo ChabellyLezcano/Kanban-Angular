@@ -56,6 +56,7 @@ app.use("/api/presupuestos", require("./routes/presupuestos"));
 app.use("/api/eventos", require("./routes/eventos"));
 app.use("/api/inventario", require("./routes/inventario"));
 app.use("/api/cita", require("./routes/citas"));
+app.use("/api/correo", require("./routes/correos"));
 
 //Inicio del servidor
 app.listen(process.env.PORT, () => {
