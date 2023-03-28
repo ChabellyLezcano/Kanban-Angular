@@ -13,6 +13,15 @@ import { InventarioService } from './services/inventario.service';
 export class InventarioComponent implements OnInit{
 
   displayDialog = false; // provide an initializer here
+  globalFilter: string;
+  rowsOptions = [10, 50, 100];
+  rows = 10;
+
+
+logout() {
+  this.router.navigateByUrl('/auth');
+  this.authService.logout();
+}
 
   productos: Producto[] = [];
   productosHtml: string[] = [];
@@ -21,7 +30,15 @@ export class InventarioComponent implements OnInit{
   date3!: Date;
   showTime="true"
 
+  sidebarOpen = false;
 
+closeSidebar() {
+  this.sidebarOpen = false;
+}
+
+openSidebar() {
+  this.sidebarOpen = true;
+}
   showModalDialog() {
     this.displayDialog = true;
   }
@@ -53,7 +70,7 @@ export class InventarioComponent implements OnInit{
     private router: Router,
     private inventarioService: InventarioService,
     private authService: AuthService,
-  ) {}
+  ) {this.globalFilter = '';}
 
   inventario() {
     console.log(this.miFormulario.value);
@@ -104,6 +121,44 @@ getInventario() {
       console.log('Error al obtener el inventario:', error);
     }
   );
+}
+
+deleteProducto(_id: string) {
+  Swal.fire({
+    title: '¿Estás seguro?',
+    text: 'No podrás revertir esto!',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Sí, bórralo!',
+  }).then((result) => {
+    if (result.isConfirmed) {
+      this.inventarioService.deleteProducto(_id).subscribe(
+        (resp) => {
+          Swal.fire(
+            'Borrado', 'Doctor eliminado correctamente', 'success');
+        this.getInventario(); // refresh the doctor's list after deletion
+      },
+      (error) => {
+        console.log(error);
+        Swal.fire('Error', error.error.msg, 'error');
+      }
+    );
+  }
+});
+}
+
+// Implement the search function
+applyGlobalFilter() {
+  this.productos = this.productos.filter((producto) => {
+    return producto && producto.name && producto.name.toLowerCase().includes(this.globalFilter.toLowerCase());
+  });
+}
+
+
+onRowsChange(value: number) {
+  this.rows = value;
 }
 }
 

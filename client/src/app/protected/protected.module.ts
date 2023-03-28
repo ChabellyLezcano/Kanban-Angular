@@ -8,7 +8,6 @@ import { PerfilComponent } from './perfil/perfil.component';
 import { DoctoresComponent } from './doctores/doctores.component';
 
 import { PrimeNgModule } from '../prime-ng/prime-ng.module';
-import { SharedModule } from '../shared/shared.module';
 import { ButtonModule } from 'primeng/button';
 import { PacientesComponent } from './pacientes/pacientes.component';
 import { DialogModule } from 'primeng/dialog';
@@ -24,6 +23,9 @@ import {ToolbarModule} from 'primeng/toolbar';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { PanelModule } from 'primeng/panel';
 import { DropdownModule } from 'primeng/dropdown';
+import {SidebarModule} from 'primeng/sidebar';
+import { MenuModule } from 'primeng/menu';
+import {HeadbarComponent} from '../shared/headbar/headbar.component'
 
 
 @NgModule({
@@ -36,14 +38,14 @@ import { DropdownModule } from 'primeng/dropdown';
     EventosComponent,
     InventarioComponent,
     EstadisticasComponent,
-    PresupuestosComponent
+    PresupuestosComponent,
+    HeadbarComponent // add this line
   ],
   imports: [
     CommonModule,
     ProtectedRoutingModule,
     ReactiveFormsModule, 
     PrimeNgModule,
-    SharedModule,
     ButtonModule,
     DialogModule, TableModule,
     TreeSelectModule,
@@ -51,8 +53,9 @@ import { DropdownModule } from 'primeng/dropdown';
     ToolbarModule,
     FontAwesomeModule,
     PanelModule,
-    DropdownModule
-    
+    DropdownModule,
+    SidebarModule,
+    MenuModule
   ]
 })
 export class ProtectedModule { }

@@ -14,7 +14,21 @@ import { DoctoresService } from './services/doctores.service';
 export class DoctoresComponent {
   displayDialog = false; // provide an initializer here
   displayEditDialog = false; // add this variable
+
+  logout() {
+    this.router.navigateByUrl('/auth');
+    this.authService.logout();
+  }
+
+  sidebarOpen = false;
+
+  closeSidebar() {
+    this.sidebarOpen = false;
+  }
   
+  openSidebar() {
+    this.sidebarOpen = true;
+  }
   opcionesCabecera = [
     { value: 'Dr.', label: 'Dr.' },
     { value: 'Dra.', label: 'Dra.' }
@@ -159,6 +173,34 @@ verDoctor(id: string) {
 }
 
 //Editar doctor por Id
+editarDoctor(id: string) {
+  // obtiene los valores del formulario de edición
+  const {
+    cabecera,
+    name,
+    apellidos,
+    email,
+    numColegiado,
+    telefono_movil,
+    especialidad,
+    dni
+  } = this.miFormulario.value;
+
+  // envía la solicitud de edición al servicio
+  this.doctoresService.editarDoctor(id, cabecera, name, apellidos, email, numColegiado, telefono_movil, especialidad, dni).subscribe(
+    (resp) => {
+      console.log(resp);
+      Swal.fire('Éxito', 'Doctor actualizado correctamente', 'success');
+      this.router.navigateByUrl('/doctores');
+      this.displayEditDialog = false; // cierra el formulario de edición
+      this.getDoctores(); // actualiza la lista de doctores después de la edición
+    },
+    (error) => {
+      console.log(error);
+      Swal.fire('Error', error.error.msg, 'error');
+    }
+  );
+}
 
 
 }

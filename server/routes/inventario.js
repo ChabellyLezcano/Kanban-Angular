@@ -25,7 +25,7 @@ router.post(
 );
 
 // Borrar perfil
-router.delete("/deleteProducto/:id", borrarProducto);
+router.delete("/deleteProducto/:id", validarJWT, borrarProducto);
 
 // Actualizar perfil
 router.put(

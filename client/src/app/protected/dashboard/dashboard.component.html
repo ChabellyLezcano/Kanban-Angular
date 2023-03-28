@@ -1,27 +1,33 @@
+<app-headbar></app-headbar>
 
-<h1>Dashboard</h1>
-<hr>
-<app-navbar></app-navbar>
-<p>
+<div class="main-content" [class.main-content-open]="sidebarOpen" [style.margin-left.px]="sidebarOpen ? 200 : 0" [style.transition]="'margin-left 0.5s ease'">
+ <div class="card-custom-general">
+  <p>
     Esta página sólo funciona si estás autenticado
-</p>
+  </p>
 
-<h4>User info</h4>
-<pre>{{ usuario | json }}</pre>
+  <h4>User info</h4>
+  <pre>{{ usuario | json }}</pre>
 
-<button pButton pRipple type="button" label="Pacientes" class="p-button-raised p-button-primary" routerLink="/pacientes">
-</button>
-<button pButton pRipple type="button" label="Doctores" class="p-button-raised p-button-secondary" routerLink="/doctores"></button>
+</div>
+ </div>
+  
 
+<div class="sidebar" [ngClass]="{'open': sidebarOpen, 'closed': !sidebarOpen}" [style.transition]="'all 0.3s ease'">
+  <button (click)="closeSidebar()" class="close-button pi pi-times"></button>
+  <ul>
+    <li><a routerLink="/dashboard"><i class="pi pi-home"></i> Home</a></li>
+    <li><a routerLink="/pacientes"><i class="pi pi-id-card"></i> Pacientes</a></li>
+    <li><a routerLink="/tratamientos"><i class="pi pi-list"></i> Tratamientos</a></li>
+    <li><a routerLink="/doctores"><i class="pi pi-users"></i> Doctores</a></li>
+    <li><a routerLink="/inventario"><i class="pi pi-shopping-cart"></i> Inventario</a></li>
+    <li><a routerLink="/eventos"><i class="pi pi-calendar"></i>Calendario</a></li>
+    <li><a routerLink="/presupuestos"><i class="pi pi-dollar"></i> Presupuestos</a></li>
+    <li><a routerLink="/estadisticas"><i class="pi pi-chart-bar"></i> Estadísticas</a></li>
+    <li style="position:absolute; bottom:0; left:0; right:0; text-align:center;"><a (click)="logout()" style="color:red;"><i class="pi pi-sign-out" style="color:red;"></i>Cerrar sesión</a></li>
+ </ul>
+</div>
 
+<button (click)="openSidebar()" class="open-button pi pi-bars logo-bars" [style.transition]="'all 0.3s ease, z-index 0s linear ' + (sidebarOpen ? '0s' : '0.3s')"></button>
+  
 
-<button pButton pRipple type="button" label="Eventos" class="p-button-raised p-button-warning" routerLink="/eventos"></button>
-
-<button pButton pRipple type="button" label="Tratamientos" class="p-button-raised p-button-success" routerLink="/tratamientos"></button>
-<button pButton pRipple type="button" label="Estadísticas" class="p-button-raised p-button-help" routerLink="/estadisticas"></button>
-<button pButton pRipple type="button" label="Presupuestos" class="p-button-raised" routerLink="/presupuestos" style="background-color: rgb(220, 102, 163);"></button>
-<button pButton pRipple type="button" label="Inventario" class="p-button-raised" routerLink="/inventario" style="background-color: rgb(0, 0, 0);"></button>
-
-
-<button (click)="logout()" pButton pRipple type="button" label="Logout" class="p-button-raised p-button-danger">
-</button>

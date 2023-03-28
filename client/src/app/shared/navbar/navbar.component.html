@@ -1,1 +1,15 @@
-<div>Sidebar</div>
+<div class="sidebar" [ngClass]="{'open': sidebarOpen, 'closed': !sidebarOpen}">
+  <button (click)="closeSidebar()" class="close-button pi pi-times"></button>
+  <ul>
+    <li><a routerLink="/pacientes">Pacientes</a></li>
+    <li><a routerLink="/tratamientos">Tratamientos</a></li>
+    <li><a routerLink="/doctores">Doctores</a></li>
+    <li><a routerLink="/inventario">Inventario</a></li>
+    <li><a routerLink="/eventos">Calendario</a></li>
+    <li><a routerLink="/presupuestos">Presupuestos</a></li>
+    <li><a routerLink="/estadisticas">Estadísticas</a></li>
+ 
+  </ul>
+</div>
+
+<button (click)="openSidebar()" class="open-button pi pi-bars"></button>

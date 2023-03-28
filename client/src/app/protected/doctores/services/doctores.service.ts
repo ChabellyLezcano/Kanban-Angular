@@ -79,11 +79,23 @@ deleteDoctor(_id: string) {
   }
 
   //Servicio editar doctor por id
-  editarDoctor(id: string, doctor: Doctores) {
+  editarDoctor(id: string, cabecera: string, name: string, apellidos: string, email: string, numColegiado: string, telefono_movil: string, especialidad: string, dni: string) {
     const url = `${this.baseUrl}/doctor/actualizarDoctor/${id}`;
+    const body = {
+      cabecera,
+      name,
+      apellidos,
+      email,
+      numColegiado,
+      telefono_movil,
+      especialidad,
+      dni
+    };
     const headers = new HttpHeaders({
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
     });
-    return this.http.put<DoctoresResponse>(url, doctor, { headers });
+    return this.http.put<DoctoresResponse>(url, body, { headers });
   }
+
 }

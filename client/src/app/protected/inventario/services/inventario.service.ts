@@ -52,5 +52,15 @@ export class InventarioService {
   
     return this.http.get<InventarioResponse>(url, { headers });
   }
+
+  //Borrar producto
+  deleteProducto(_id: string) {
+    const url = `${this.baseUrl}/inventario/deleteProducto/${_id}`;
+    const headers = new HttpHeaders().set(
+      'x-token',
+      localStorage.getItem('token') || ''
+    );
+    return this.http.delete(url, { headers });
+  }
   
 }

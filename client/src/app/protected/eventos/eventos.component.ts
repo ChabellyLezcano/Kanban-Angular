@@ -16,10 +16,23 @@ export class EventosComponent implements OnInit{
 
   eventos: Evento[] = [];
 
+  logout() {
+    this.router.navigateByUrl('/auth');
+    this.authService.logout();
+  }
+  
   time!: Date;
   date3!: Date;
   showTime="true"
+  sidebarOpen = false;
 
+  closeSidebar() {
+    this.sidebarOpen = false;
+  }
+  
+  openSidebar() {
+    this.sidebarOpen = true;
+  }
   showModalDialog() {
     this.displayDialog = true;
   }

@@ -885,6 +885,60 @@ strong {
   align-items: center;
 }
 
+/*Sidebar*/
+/* Estilo por defecto del sidebar */
+.sidebar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 300px; /* Ancho del sidebar */
+  background-color: #f1f1f1;
+  overflow-x: hidden;
+  padding-top: 20px;
+  transition: all 0.3s ease-in-out; /* Transición suave para la animación */
+}
+
+/* Estilo para ocultar el sidebar cuando está minimizado */
+.sidebar-closed {
+  width: 0;
+  padding-top: 0;
+}
+
+/* Estilo para el botón de abrir/cerrar */
+.sidebar-toggle {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  z-index: 9999; /* Asegurarse de que el botón esté encima de todo */
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out; /* Transición suave para la animación */
+}
+
+/* Estilo para ocultar el botón cuando el sidebar está abierto */
+.sidebar-open .sidebar-toggle {
+  display: none;
+}
+
+@media screen and (max-width: 991px) {
+  .p-sidebar {
+    width: 250px;
+  }
+  .p-sidebar .sidebar-menu li a {
+    padding: 10px;
+  }
+  .p-sidebar .sidebar-menu {
+    margin: 20px;
+  }
+  .p-sidebar-mask {
+    z-index: 1030;
+  }
+}
+
 /*------------------------------------------------------------------
   [ Button ]*/
 .container-login100-form-btn {
@@ -959,30 +1013,229 @@ strong {
 .login100-form-btn:disabled {
   background-color: grey;
 }
+/*Card*/
+.card-custom-general {
+  position: absolute;
+  top: 4.5rem;
+  left: 2rem;
+  right: 2rem;
+  margin: auto;
+  padding: 2.5rem;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+  background-color: #f8f8f8;
+  z-index: 1;
+  height: auto;
+}
+
+.logo-bars{
+  position: absolute;
+}
+
+/*Navbar*/
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar__left {
+  display: flex;
+  align-items: center;
+}
+
+.navbar__logo {
+  width: 40px;
+  height: 40px;
+  margin-right: 50px;
+  margin-left: 220px;
+  
+}
+
+.navbar__search-form {
+  display: flex;
+  align-items: center;
+}
+
+.navbar__search-input {
+  border: none;
+  padding: 8px;
+  border-radius: 4px;
+  margin-right: 10px;
+  width: 200px;
+}
+
+.navbar__search-button {
+  background-color: #f2f2f2;
+  border: none;
+  padding: 8px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.navbar__search-button i {
+  color: #999;
+}
+
+.navbar__right {
+  display: flex;
+  align-items: center;
+}
+
+.navbar__notification {
+  position: relative;
+}
+
+.navbar__notification i {
+  color: #999;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.navbar__notification::after {
+  content: "";
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  width: 10px;
+  height: 10px;
+  background-color: red;
+  border-radius: 50%;
+  display: none;
+}
+
+.navbar__notification:hover::after {
+  display: block;
+}
+
+.navbar__profile {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+  cursor: pointer;
+}
+
+.navbar__profile-image {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.navbar__profile-name {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.navbar__dropdown {
+  position: relative;
+}
+
+.navbar__dropdown-button {
+  background-color: #f2f2f2;
+  border: none;
+  padding: 8px;
+  border-radius: 4px;
+  margin-left: 20px;
+  cursor: pointer;
+}
+
+.navbar__dropdown-button i {
+  color: #999;
+}
+
+.navbar__dropdown-menu {
+  position: absolute;
+  top: 40px;
+  right: 0;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+  display: none;
+}
+
+.navbar__dropdown-menu li {
+  list-style: none;
+  padding: 8px 20px;
+}
+
+.navbar__dropdown-menu li:hover {
+  background-color: #f2f2f2;
+}
+
+.navbar__dropdown:hover .navbar__dropdown-menu {
+  display: block;
+}
 
 /*[ Sidebar ]
   ///////////////////////////////////////////////////////////
   */
-.menu-wrapper {
-  width: 250px;
-  position: fixed;
+  .sidebar {
+  position: absolute;
   top: 0;
-  left: 0;
   bottom: 0;
-  background-color: #f8f9fa;
-  z-index: 999;
-  overflow-y: auto;
+  left: 0;
+  width: 200px; /* ajusta este valor según la anchura de tu sidebar */
+  background-color: #fff;
+  box-shadow: 2px 0 4px rgba(0, 0, 0, 0.1);
+  z-index: 2;
   transition: all 0.3s ease;
-}
+  }
+  
+  .main-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    padding: 0;
+    margin: 0;
+    transition: all 0.3s ease;
+  }
+  
+  .main-content-open {
+    padding-left: 200px; /* ajusta este valor según la anchura de tu sidebar */
+  }
+  
+  .sidebar.open {
+    left: 0; /* Muestra el sidebar */
+  }
+  
+  .main-content-open {
+    margin-left: 200px; /* Mueve el contenido principal */
+  }
 
-.menu-wrapper.closed {
-  width: 0;
-}
+  
+  .sidebar.closed {
+    left: -200px;
+  }
+  
+  .open-button {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    z-index: 999;
+  }
+  
+  .close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+  
+
 
 /*[ SHAPE ]
   ///////////////////////////////////////////////////////////
   */
-
+  .main-content-dashboard {
+    margin-left: 250px; /* Ancho del sidebar */
+    padding: 20px;
+  }
 /*[ Display ]
   -----------------------------------------------------------
   */

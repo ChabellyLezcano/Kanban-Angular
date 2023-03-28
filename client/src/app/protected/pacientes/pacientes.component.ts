@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { PacientesService } from './services/pacientes.service';
 import { Paciente } from './interfaces/pacientes.interface';
+import { AuthService } from 'src/app/auth/services/auth.service';
 
 @Component({
   selector: 'app-pacientes',
@@ -18,6 +19,20 @@ export class PacientesComponent implements OnInit {
   rows = 10;
 
 
+logout() {
+  this.router.navigateByUrl('/auth');
+  this.authService.logout();
+}
+
+  sidebarOpen = false;
+
+  closeSidebar() {
+    this.sidebarOpen = false;
+  }
+  
+  openSidebar() {
+    this.sidebarOpen = true;
+  }
    showModalDialog() {
     this.displayDialog = true;
   }
@@ -30,26 +45,25 @@ export class PacientesComponent implements OnInit {
   pacienteSeleccionado: any;
 
   miFormulario: FormGroup = this.fb.group({
-    name: ['Sara', [Validators.required]],
-    apellidos: ['Cerdeña Lara', [Validators.required]],
-    telefono_movil: ['622747447', [Validators.required]],
-    email: ['sara@gmail.com', [Validators.required, Validators.email]],
-    dni: ['567840292-P', [Validators.required]],
-    direccion: ['Avenida Fierro 12', [Validators.required]],
-    cp: ['28004', [Validators.required]],
-    municipio: ['Madrid', [Validators.required]],
-    provincia: ['Madrid', [Validators.required]]
+    name: ['', [Validators.required]],
+    apellidos: ['', [Validators.required]],
+    telefono_movil: ['', [Validators.required]],
+    email: ['', [Validators.required, Validators.email]],
+    dni: ['', [Validators.required]],
+    direccion: ['', [Validators.required]],
+    cp: ['', [Validators.required]],
+    municipio: ['', [Validators.required]],
+    provincia: ['', [Validators.required]]
   });
 
   constructor(
     private router: Router,
     private fb: FormBuilder,
-    private pacientesService: PacientesService
+    private pacientesService: PacientesService,
+    private authService: AuthService
   ) {
     this.globalFilter = '';
   }
-
- 
 
   addPaciente() {
     console.log(this.miFormulario.value);

@@ -1,15 +1,21 @@
-<h4>User info</h4>
-<pre>{{ usuario | json }}</pre>
+<app-headbar></app-headbar>
+<div class="sidebar" [ngClass]="{'open': sidebarOpen, 'closed': !sidebarOpen}" [style.transition]="'all 0.3s ease'">
+  <button (click)="closeSidebar()" class="close-button pi pi-times"></button>
+  <ul>
+    <li><a routerLink="/dashboard"><i class="pi pi-home"></i> Home</a></li>
+    <li><a routerLink="/pacientes"><i class="pi pi-user"></i> Pacientes</a></li>
+    <li><a routerLink="/tratamientos"><i class="pi pi-clipboard"></i> Tratamientos</a></li>
+    <li><a routerLink="/doctores"><i class="pi pi-users"></i> Doctores</a></li>
+    <li><a routerLink="/inventario"><i class="pi pi-shopping-cart"></i> Inventario</a></li>
+    <li><a routerLink="/eventos"><i class="pi pi-calendar"></i>Calendario</a></li>
+    <li><a routerLink="/presupuestos"><i class="pi pi-dollar"></i> Presupuestos</a></li>
+    <li><a routerLink="/estadisticas"><i class="pi pi-chart-bar"></i> Estadísticas</a></li>
+  </ul>
+</div>
 
-<button
-  pButton
-  pRipple
-  type="button"
-  (click)="showModalDialog()"
-  icon="pi pi-plus"
-  label="Añadir doctor"
-  class="p-button-primary"
-></button>
+<button (click)="openSidebar()" class="open-button pi pi-bars" [style.transition]="'all 0.3s ease, z-index 0s linear ' + (sidebarOpen ? '0s' : '0.3s')"></button>
+  
+
 
 <p-dialog
   [(visible)]="displayDialog"
@@ -136,6 +142,18 @@
   </div>
 </p-dialog>
 
+<div class="main-content" [style.margin-left]="sidebarOpen ? '200px' : '0'" style="padding-top: 2rem;">
+
+<div class="card-custom-general">
+  <button
+  pButton
+  pRipple
+  type="button"
+  (click)="showModalDialog()"
+  icon="pi pi-plus"
+  label="Añadir doctor"
+  class="p-button-primary"
+></button>
 <ul>
   <li *ngFor="let doctor of doctores">
     <div class="card">
@@ -163,12 +181,13 @@
             (click)="verDoctor(doctor._id)"
           ></i>
           <i class="pi pi-envelope custom-icon-envelop icon"></i>
-          <i class="pi pi-file-edit custom-icon-edit icon" ></i>
+          <i class="pi pi-file-edit custom-icon-edit icon" (click)="editarDoctor(doctor._id)" ></i>
         </div>
       </div>
     </div>
   </li>
 </ul>
+</div>
 
 <p-dialog [(visible)]="doctorSeleccionado" [responsive]="true"  [closable]="true" [closeOnEscape]="true" [dismissableMask]="true" [draggable]="true" (onHide)="doctorSeleccionado = null">
   <div>
@@ -180,4 +199,6 @@
     <p>DNI: {{ doctorSeleccionado?.dni }}</p>
     </div>
     </p-dialog>
+</div>
 
+ 

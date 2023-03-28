@@ -17,6 +17,21 @@ export class TratamientosComponent {
     return this.authService.usuario;
   }
 
+logout() {
+  this.router.navigateByUrl('/auth');
+  this.authService.logout();
+}
+
+  sidebarOpen = false;
+
+  closeSidebar() {
+    this.sidebarOpen = false;
+  }
+  
+  openSidebar() {
+    this.sidebarOpen = true;
+  }
+
   tratamientos: Tratamiento[] = [];
   globalFilter: string;
   rowsOptions = [10, 50, 100];
@@ -32,7 +47,7 @@ rows = 10;
     private router: Router,
     private authService: AuthService,
     private fb: FormBuilder,
-    private tratamientoService: TratamientosService
+    private tratamientoService: TratamientosService,
   ) { this.globalFilter = ''; }
 
   showModalDialog() {

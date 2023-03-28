@@ -31,7 +31,7 @@ const ProductoSchema = Schema({
         required: true,
     },
     fecha: {
-        type: String,
+        type: Date,
         required: true,
     },
     usuario: {

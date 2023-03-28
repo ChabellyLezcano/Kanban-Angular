@@ -5,7 +5,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PrimeNgModule } from './prime-ng/prime-ng.module';
-import { SharedModule } from './shared/shared.module';
 import { SidebarModule } from 'ng-sidebar';
 import { DialogModule } from 'primeng/dialog';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -15,6 +14,8 @@ import {CalendarModule} from 'primeng/calendar';
 import { FormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { TableModule } from 'primeng/table';
+import {MenuModule} from 'primeng/menu';
+
 
 @NgModule({
   declarations: [
@@ -25,8 +26,7 @@ import { TableModule } from 'primeng/table';
     AppRoutingModule,
     HttpClientModule,
     PrimeNgModule,
-    SharedModule,
-    SidebarModule.forRoot(),
+    SidebarModule,
     DialogModule,
     BrowserAnimationsModule,
     TreeSelectModule,
@@ -34,7 +34,9 @@ import { TableModule } from 'primeng/table';
     CalendarModule,
     FormsModule,
     FontAwesomeModule,
-    TableModule
+    TableModule,
+    MenuModule
+
   
   ],
   providers: [],
