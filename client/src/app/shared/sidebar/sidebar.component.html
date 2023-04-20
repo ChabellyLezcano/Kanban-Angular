@@ -1,0 +1,110 @@
+<div class="card flex justify-content-center">
+    <p-sidebar [(visible)]="sidebarVisible">
+        <ng-template pTemplate="header">
+            <img src="../../../assets/images/Logo2.png" alt="Logo de mi aplicación" style="width: 82%; max-height: 100px;">
+        </ng-template>
+        <ng-template pTemplate="content">
+            <ul class="menu-list">
+                <li>
+                  <a routerLink="/dashboard">
+                    <div class="icon-container">
+                      <i class="bx bx-home"></i>
+                      <span class="icon-name">Home</span>
+                    </div>
+                  </a>
+                </li>
+                <li>
+                  <a routerLink="/pacientes">
+                    <div class="icon-container">
+                      <i class="pi pi-users"></i>
+                      <span class="icon-name">Pacientes</span>
+                    </div>
+                  </a>
+                </li>
+                <li>
+                  <a routerLink="/tratamientos">
+                    <div class="icon-container">
+                      <i class="pi pi-id-card"></i>
+                      <span class="icon-name">Tratamientos</span>
+                    </div>
+                  </a>
+                </li>
+                <li>
+                  <a routerLink="/facturas">
+                    <div class="icon-container">
+                      <i class="pi pi-dollar"></i>
+                      <span class="icon-name">Facturas</span>
+                    </div>
+                  </a>
+                </li>
+                <li>
+                  <a routerLink="/calendario">
+                    <div class="icon-container">
+                      <i class="pi pi-calendar"></i>
+                      <span class="icon-name">Calendario</span>
+                    </div>
+                  </a>
+                </li>
+                <li>
+                  <a routerLink="/presupuestos">
+                    <div class="icon-container">
+                      <i class="bx bx-folder"></i>
+                      <span class="icon-name">Presupuestos</span>
+                    </div>
+                  </a>
+                </li>
+                <li>
+                  <a routerLink="/dashboard/doctor">
+                    <div class="icon-container">
+                      <i class="bx bx-first-aid"></i>
+                      <span class="icon-name">Doctores</span>
+                    </div>
+                  </a>
+                </li>
+                <li>
+                  <a routerLink="/inventario">
+                    <div class="icon-container">
+                      <i class="pi pi-inbox"></i>
+                      <span class="icon-name">Inventario</span>
+                    </div>
+                  </a>
+                </li>
+              </ul>
+          </ng-template>
+        <ng-template pTemplate="footer">
+            <p-footer>
+                <div style="display: flex; justify-content: space-between;">
+                    <div>Logout</div>
+                    <a><i class="pi pi-sign-out" style="color: red; cursor: pointer;" (click)="logout()"></i></a>
+                </div>
+            </p-footer>
+        </ng-template>
+    </p-sidebar>
+   
+</div>
+
+<header class="rounded">
+  <p-button (click)="sidebarVisible = true" icon="pi pi-bars"></p-button>
+  <div class="left-section">
+    <form>
+      <input type="text" placeholder="Buscar..." class="rounded-pill">
+      <button type="submit" class="rounded-pill"><i class="bx bx-search"></i></button>
+    </form>
+  </div>
+  
+  <div class="right-section">
+    <span class="px-4">Hola, {{usuario.nombre}}</span>
+    <img src="ruta/a/la/foto/de/perfil" alt="Foto de perfil">
+    <a href="#"><i class="bx bx-bell px-2" style="font-size: 22px;"></i></a>
+    <div class="dropdown">
+      <a href="#"><i class="bx bx-dots-vertical-rounded" style="font-size: 22px;"></i></a>
+      <div class="dropdown-menu">
+        <li href="#">Configuración</li>
+        <li href="#">Editar perfil</li>
+      </div>
+    </div>
+  </div>
+</header>
+
+
+

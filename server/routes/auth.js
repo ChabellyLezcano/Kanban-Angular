@@ -12,36 +12,32 @@ const router = Router();
 
 // Crear un nuevo usuario
 router.post(
-  "/new",
+  "/registro",
   [
-    check("name", "El campo del nombre está vacío").notEmpty(),
+    check("nombre", "El campo del nombre está vacío").notEmpty(),
     check("email", "El campo del email está vacío").notEmpty(),
     check("email", "El formato del email es incorrecto").isEmail(),
     check("password", "El campo de la contraseña está vacío").notEmpty(),
     check(
-      "password",
-      "La contraseña debe tener longitud de 8, tener una mayúscula, una minúscula y un carácter especial"
-    ).isStrongPassword({
-      minLength: 8,
-      minLowercase: 1,
-      minUppercase: 1,
-      minNumbers: 1,
-      minSymbols: 1,
-    }),
+        "password",
+        "La contraseña debe tener al menos 8 caracteres"
+      ).isLength({ min: 8 }),
+      check(
+        "password",
+        "La contraseña debe contener al menos un número y una mayúscula"
+      ).matches(/^(?=.*[A-Z])(?=.*\d)/),
     check(
       "validatePassword",
       "El campo de la contraseña está vacío"
     ).notEmpty(),
     check(
-      "validatePassword",
-      "La contraseña debe tener longitud de 8, tener una mayúscula, una minúscula y un carácter especial"
-    ).isStrongPassword({
-      minLength: 8,
-      minLowercase: 1,
-      minUppercase: 1,
-      minNumbers: 1,
-      minSymbols: 1,
-    }),
+        "validatePassword",
+        "La contraseña debe tener al menos 8 caracteres"
+      ).isLength({ min: 8 }),
+      check(
+        "validatePassword",
+        "La contraseña debe contener al menos un número y una mayúscula"
+      ).matches(/^(?=.*[A-Z])(?=.*\d)/),
     validarCampos,
   ],
   crearUsuario
@@ -60,5 +56,6 @@ router.post(
 
 // Validar y revalidar token
 router.get( '/renew', validarJWT , revalidarToken );
+
 
 module.exports = router;

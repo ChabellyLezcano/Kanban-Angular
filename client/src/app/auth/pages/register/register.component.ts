@@ -10,7 +10,7 @@ import { AuthService } from '../../services/auth.service';
 })
 export class RegisterComponent {
   miFormulario: FormGroup = this.fb.group({
-    name: ['Juana', [Validators.required]],
+    nombre: ['Juana', [Validators.required]],
     email: ['juana@gmail.com', [Validators.required, Validators.email]],
     password: ['Hola123456@', [Validators.required, Validators.minLength(8)]],
     validatePassword: [
@@ -22,13 +22,13 @@ export class RegisterComponent {
   constructor(private fb: FormBuilder, private router: Router, private authService: AuthService) {}
 
   registro() {
-    const { name, email, password, validatePassword } = this.miFormulario.value;
+    const { nombre, email, password, validatePassword } = this.miFormulario.value;
 
-    this.authService.registro( name, email, password, validatePassword )
+    this.authService.registro( nombre, email, password, validatePassword )
       .subscribe( ok => {
 
         if ( ok === true ) {
-          this.router.navigateByUrl('/perfil');
+          this.router.navigateByUrl('/dashboard');
         } else {
           Swal.fire('Error', ok, 'error');
         }

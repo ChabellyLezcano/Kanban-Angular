@@ -4,7 +4,6 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { PrimeNgModule } from './prime-ng/prime-ng.module';
 import { SidebarModule } from 'ng-sidebar';
 import { DialogModule } from 'primeng/dialog';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -25,17 +24,6 @@ import {MenuModule} from 'primeng/menu';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    PrimeNgModule,
-    SidebarModule,
-    DialogModule,
-    BrowserAnimationsModule,
-    TreeSelectModule,
-    InputTextareaModule,
-    CalendarModule,
-    FormsModule,
-    FontAwesomeModule,
-    TableModule,
-    MenuModule
 
   
   ],

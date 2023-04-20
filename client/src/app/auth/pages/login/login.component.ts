@@ -15,6 +15,7 @@ export class LoginComponent {
     password: ['Hola123456@', [Validators.required, Validators.minLength(8)]],
   });
 
+  value: string = '';
   constructor(private fb: FormBuilder, private router: Router, private authService: AuthService) {}
 
   login() {
